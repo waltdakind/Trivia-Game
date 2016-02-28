@@ -1,4 +1,7 @@
 //questions and answers
+// all the stuff for populating the other stuff
+//===============================================
+var i = 0;
 var trivia = [ 
 {"question": "What was Harry Houdini's real name?", "realAnswer": "Erich Weiss", "fakeAnswer1": "Robert Houdin", "fakeAnswer2":"Neville Maskylne", "fakeAnswer3":"Magic Mike"},
 {"question": "Rabbits engage in coprophagy, what is that?", "realAnswer": "Eating their own droppings", "fakeAnswer1": "Mating in large groups", "fakeAnswer2":"Mating multiple times ","fakeAnswer3": "Eating grasses and vegetables"},
@@ -12,29 +15,28 @@ var trivia = [
 {"question": "What was the Beatles' first single in 1962?", "realAnswer": "Love Me Do", "fakeAnswer1": "Help!", "fakeAnswer2":"I Saw Her Standing There","fakeAnswer3": "I Am the Walrus"},
 {"question": "What country was Vincent VanGogh from?", "realAnswer": "The Netherlands", "fakeAnswer1": "France","fakeAnswer2": "Germany","fakeAnswer3": "Austria"},
 {"question": "What is the most widely eaten fish in the world?", "realAnswer": "Herring", "fakeAnswer1": "Trout","fakeAnswer2": "Salmon","fakeAnswer3": "Tilapia"}];
-
+//=========================================================
 // this is the syntax that works! 
 //  var questionForDisplay = trivia[i].question;
-//  var answerForDisplay = trivia[i].realAnswer;
-//  var fakeAnswer1ForDisplay = trivia[i].fakeAnswer1;
-//  var fakeAnswer2ForDisplay = trivia[i].fakeAnswer2;
-//  var fakeAnswer3ForDisplay = trivia[i].fakeAnswer3;
+//==========================================================
 
-var i = 0;
-var answersOntoButtons = function() {
+
+var answersOntoButtons = function(num) {
 
 // this is the syntax that works! 
 
- var questionForDisplay = trivia[i].question;
- var answerForDisplay = trivia[i].realAnswer;
- var fakeAnswer1ForDisplay = trivia[i].fakeAnswer1;
- var fakeAnswer2ForDisplay = trivia[i].fakeAnswer2;
- var fakeAnswer3ForDisplay = trivia[i].fakeAnswer3;
+ var questionForDisplay = trivia[num].question;
+ var answerForDisplay = trivia[num].realAnswer;
+ var fakeAnswer1ForDisplay = trivia[num].fakeAnswer1;
+ var fakeAnswer2ForDisplay = trivia[num].fakeAnswer2;
+ var fakeAnswer3ForDisplay = trivia[num].fakeAnswer3;
 
  //deliver real question to a random button and fake answers to the other three
 var randomSpot = Math.floor((Math.random() * 4) + 1);
  //console.log(randomSpot);
 //populate buttons with answers
+ $("#question").text(questionForDisplay);
+
 switch(randomSpot) {
     case 1:
         $("#butt1").text(answerForDisplay);
@@ -91,6 +93,7 @@ var Timer = function() {
     var thisObject;
     
     // Function: Start the timer
+    //=============================
     this.Start = function()
     {
         this.Enable = new Boolean(true);
@@ -107,6 +110,7 @@ var Timer = function() {
     };
     
     // Function: Stops the timer
+    //==================================
     this.Stop = function()
     {            
         thisObject.Enable = new Boolean(false);
@@ -114,17 +118,13 @@ var Timer = function() {
     };
 
 };
-
-
-
-var index = 31;
+answersOntoButtons(i);
+var index = 2;
 var obj = new Timer();
 obj.Interval = 1000;
 obj.Tick = timer_tick;
 obj.Start();
-answersOntoButtons();
-//populateTrivia();
-console.log(trivia.question);
+//==================
 function timer_tick()
 {
     index  = index - 1;
@@ -133,12 +133,16 @@ function timer_tick()
     if (index <= 0) {
         obj.Stop();
         document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
+        i++;
+        obj.Start();
+        answersOntoButtons(i);       
     }
 }
 
 
 
-
+//main process
+//================================================================
 
 
 // function CountDown (secs, elem) {
