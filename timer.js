@@ -1,18 +1,53 @@
 // questions and answers
-var trivia = [ {question: "What was Harry Houdini's real name?, realAnswer: "Erich Weiss, fakeAnswers: "Robert Houdin", "Neville Maskylne", "Magic Mike"},
-{question: "Rabbits engage in coprophagy, what is that?, realAnswer: "Eating their own droppings, fakeAnswers: "Mating in large groups", "Mating multiple times ", "Eating grasses and vegetables"},
-{question: "Jerry Garcia was missing what finger?, realAnswer: "Right middle finger, fakeAnswers: "Left index finger", "Right pinkie finger", "Left middle finger"},
-{question: "Where is New Belgium Brewing Company located?, realAnswer: "Fort Collins, Colorado, fakeAnswers: "New Belgium, Brussels", "Golden, CO", "Highgate, VT"},
-{question: "What country of Africa has largest population?, realAnswer: "Nigeria, fakeAnswers: "Kenya", "Egypt", "Libya"},
-{question: "Who said -- Do or do not there is no try?, realAnswer: "Yoda, fakeAnswers: "Yogi Berra", "Robert Schuller", "Matlock"},
-{question: "In the film, Thelma and Louise, who co-starred with Geena Davis?, realAnswer: "Susan Sarandon, fakeAnswers: "Bea Arthur", "Betty White", "Meryl Streep"},
-{question: "If you mixed rum, simple syrup, lime juice and selter with some mint leaves you'd have what?, realAnswer: "A mojito, fakeAnswers: "A Cuba Libre", "A Manhattan", "A Cosmopolitan"},
-{question: "In darts getting three bull's eyes in a turn is called what?, realAnswer: "A hat trick, fakeAnswers: "Darn lucky", "Three in a bed", "A Low Ton"},
-{question: "What was the Beatles' first single in 1962?, realAnswer: "Love Me Do, fakeAnswers: "Help!", "I Saw Her Standing There", "I Am the Walrus"},
-{question: "What country was Vincent VanGogh from?, realAnswer: "The Netherlands, fakeAnswers: "France", "Germany", "Austria"},
-{question: "What is the most widely eaten fish in the world?, realAnswer: "Herring, fakeAnswers: "Trout", "Salmon", "Tilapia"}]
+// var trivia = [ 
+// {question: "What was Harry Houdini's real name?", realAnswer: "Erich Weiss", fakeAnswer1: "Robert Houdin", fakeAnswer2:"Neville Maskylne", fakeAnswer3:"Magic Mike"},
+// {question: "Rabbits engage in coprophagy, what is that?", realAnswer: "Eating their own droppings", fakeAnswer1: "Mating in large groups", fakeAnswer2:"Mating multiple times ",fakeAnswer3: "Eating grasses and vegetables"},
+// {question: "Jerry Garcia was missing what finger?", realAnswer: "Right middle finger", fakeAnswer1:"Left index finger", fakeAnswer2:"Right pinkie finger",fakeAnswer3: "Left middle finger"},
+// {question: "Where is New Belgium Brewing Company located?", realAnswer: "Fort Collins, Colorado", fakeAnswer1: "New Belgium, Brussels", fakeAnswer2:"Golden, CO",fakeAnswer3: "Highgate, VT"},
+// {question: "What country of Africa has largest population?", realAnswer: "Nigeria", fakeAnswer1: "Kenya", fakeAnswer2:"Egypt",fakeAnswer3:"Libya"},
+// {question: "Who said -- Do or do not there is no try?", realAnswer: "Yoda", fakeAnswer1: "Yogi Berra", fakeAnswer2:"Robert Schuller",fakeAnswer3: "Matlock"},
+// {question: "In the film, Thelma and Louise, who co-starred with Geena Davis?", realAnswer: "Susan Sarandon", fakeAnswer1: "Bea Arthur", fakeAnswer2:"Betty White",fakeAnswer3: "Meryl Streep"},
+// {question: "If you mixed rum, simple syrup, lime juice and selter with some mint leaves you'd have what?", realAnswer: "A mojito", fakeAnswer1: "A Cuba Libre", fakeAnswer2:"A Manhattan",fakeAnswer3: "A Cosmopolitan"},
+// {question: "In darts getting three bull's eyes in a turn is called what?", realAnswer: "A hat trick", fakeAnswer1: "Darn lucky", fakeAnswer2:"Three in a bed",fakeAnswer3: "A Low Ton"},
+// {question: "What was the Beatles' first single in 1962?", realAnswer: "Love Me Do", fakeAnswer1: "Help!", fakeAnswer2:"I Saw Her Standing There",fakeAnswer3: "I Am the Walrus"},
+// {question: "What country was Vincent VanGogh from?", realAnswer: "The Netherlands", fakeAnswer1: "France",fakeAnswer2: "Germany",fakeAnswer3: "Austria"},
+// {question: "What is the most widely eaten fish in the world?", realAnswer: "Herring", fakeAnswer1: "Trout",fakeAnswer2: "Salmon",fakeAnswer3: "Tilapia"}];
 
 
+var answersOntoButtons = function() {
+
+ //deliver real question to a random button and fake answers to the other three
+var randomSpot = Math.floor((Math.random() * 4) + 1);
+ //console.log(randomSpot);
+//populate buttons with answers
+switch(randomSpot) {
+    case 1:
+        $("#butt1").text("Hello world!");
+        $("#butt2").text("Nope");
+        $("#butt3").text("Nope");
+        $("#butt4").text("Nope");
+        break;
+    case 2:
+        $("#butt1").text("Nope");
+        $("#butt2").text("Hello world!");
+        $("#butt3").text("Nope");
+        $("#butt4").text("Nope");
+        break;
+    case 4:
+        $("#butt1").text("Nope");
+        $("#butt2").text("Nope");
+        $("#butt3").text("Hello world!");
+        $("#butt4").text("Nope");
+         break;
+    case 3:
+        $("#butt1").text("Nope");
+        $("#butt2").text("Nope");
+        $("#butt3").text("Nope");
+        $("#butt4").text("Hello world!");
+        break;
+}  //end switch
+
+}
 
 
 // Declaring class "Timer"
@@ -62,12 +97,12 @@ var obj = new Timer();
 obj.Interval = 1000;
 obj.Tick = timer_tick;
 obj.Start();
-
+answersOntoButtons();
 function timer_tick()
 {
-	index  = index - .5;
+	index  = index - 1;
 	document.getElementById("timerOut").innerHTML = "You have "+index+" seconds remaining to select your answer";
-	
+	//$("#butt1").text("Hello world!");
 	if (index <= 0) {
 		obj.Stop();
 		document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
@@ -75,7 +110,7 @@ function timer_tick()
 }
 
 
-obj.Start();
+
 
 // function CountDown (secs, elem) {
 // var element = document.getElementById(elem);
