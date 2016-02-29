@@ -1,3 +1,11 @@
+$( document ).ready(function() {
+    answersOntoButtons(i);
+    var index = 30;
+    var obj = new Timer();
+    obj.Interval = 1000;
+    obj.Tick = timer_tick;
+    obj.Start();
+});
 //questions and answers
 // all the stuff for populating the other stuff
 //===============================================
@@ -23,8 +31,8 @@ var trivia = [
 
 var answersOntoButtons = function(num) {
 
-// this is the syntax that works! 
-
+// Proper syntax on object lookup 
+// is working******************************
  var questionForDisplay = trivia[num].question;
  var answerForDisplay = trivia[num].realAnswer;
  var fakeAnswer1ForDisplay = trivia[num].fakeAnswer1;
@@ -64,16 +72,7 @@ switch(randomSpot) {
         break;
 }  //end switch
 
-}
-//set question  and call answersOntoButtons
-// var populateTrivia = function() {
-// for (var i = 0; 1<10; i++) {
-// var triviaQuestion = trivia.question[i];
-// console.log(triviaQuestion);
-// var triviaAnswer = trivia.realAnswer[i];
-// console.log(triviaAnswer);
-// }
-// }
+//==========================================================
 
 // Declaring class "Timer"
 var Timer = function() {        
@@ -118,8 +117,8 @@ var Timer = function() {
     };
 
 };
-answersOntoButtons(i);
-var index = 2;
+
+var index = 30;
 var obj = new Timer();
 obj.Interval = 1000;
 obj.Tick = timer_tick;
@@ -134,9 +133,11 @@ function timer_tick()
         obj.Stop();
         document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
         i++;
+        answersOntoButtons(i);    
         obj.Start();
-        answersOntoButtons(i);       
+           
     }
+}
 }
 
 
