@@ -1,10 +1,6 @@
 $( document ).ready(function() {
     answersOntoButtons(i);
-    var index = 30;
-    var obj = new Timer();
-    obj.Interval = 1000;
-    obj.Tick = timer_tick;
-    obj.Start();
+    
 });
 //questions and answers
 // all the stuff for populating the other stuff
@@ -133,9 +129,11 @@ function timer_tick()
         obj.Stop();
         document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
         i++;
-        answersOntoButtons(i);    
+        index = 30;
+        answersOntoButtons(i);  
+
         obj.Start();
-           
+        
     }
 }
 }
