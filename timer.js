@@ -13,6 +13,74 @@ $( document ).ready(function() {
 var i = 0;
 var round = 1;
 var randomSpot;
+// Declaring class "Timer"
+var Timer = function() {        
+    // Property: Frequency of elapse event of the timer in millisecond
+    this.Interval = 1000;
+    
+    // Property: Whether the timer is enabled or not
+    this.Enable = new Boolean(false);
+    
+    // Event: Timer tick
+    this.Tick;
+    
+    // Member variable: Hold interval id of the timer
+    var timerId = 0;
+    
+    // Member variable: Hold instance of this class
+    var thisObject;
+    
+    // Function: Start the timer
+    //=============================
+    this.Start = function()
+    {
+        this.Enable = new Boolean(true);
+
+        thisObject = this;
+        if (thisObject.Enable)
+        {
+            thisObject.timerId = setInterval(
+            function()
+            {
+                thisObject.Tick(); 
+            }, thisObject.Interval);
+        }
+    };
+    
+    // Function: Stops the timer
+    //==================================
+    this.Stop = function()
+    {            
+        thisObject.Enable = new Boolean(false);
+        clearInterval(thisObject.timerId);
+        round++;
+    };
+
+};
+    var index = 30;
+    var obj = new Timer();
+    obj.Interval = 1000;
+    obj.Tick = timer_tick;
+
+    obj.Start();
+    //==================
+    function timer_tick()
+    {
+        index  = index - 1;
+        document.getElementById("timerOut").innerHTML = "You have "+index+" seconds remaining to select your answer";
+
+        //$("#butt1").text("Hello world!");
+        if (index <= 0) {
+            obj.Stop();
+            document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
+            i++;
+            index = 30;
+            answersOntoButtons(i);  
+            listenToButtons;
+            obj.Start();
+            
+        }
+    }
 var trivia = [ 
 {"question": "What was Harry Houdini's real name?", "realAnswer": "Erich Weiss", "fakeAnswer1": "Robert Houdin", "fakeAnswer2":"Neville Maskylne", "fakeAnswer3":"Magic Mike", "answeredCorrectly":false},
 {"question": "Rabbits engage in coprophagy, what is that?", "realAnswer": "Eating their own droppings", "fakeAnswer1": "Mating in large groups", "fakeAnswer2":"Mating multiple times ","fakeAnswer3": "Eating grasses and vegetables", "answeredCorrectly":false},
@@ -39,9 +107,15 @@ var listenToButtons = function(num) {
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
                 console.log('success');
+                i++;
+                
+
             }
             else {
                 console.log('failure');
+                i++;
+                
+
             }
 
     });
@@ -53,9 +127,15 @@ var listenToButtons = function(num) {
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
                 console.log('success');
+                i++;
+                
+
             }
             else {
                 console.log('failure');
+                i++;
+                
+
             }
             
     });
@@ -66,9 +146,15 @@ var listenToButtons = function(num) {
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
                 console.log('success');
+                i++;
+                
+
             }
             else {
                 console.log('failure');
+                i++;
+                
+
             }
     });
 
@@ -78,9 +164,14 @@ var listenToButtons = function(num) {
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
                 console.log('success');
+                i++;
+                
+
             }
             else {
                 console.log('failure');
+                i++;
+
             }
             
     });
@@ -142,75 +233,75 @@ switch(randomSpot) {
 
 //==========================================================
 
-// Declaring class "Timer"
-var Timer = function() {        
-    // Property: Frequency of elapse event of the timer in millisecond
-    this.Interval = 1000;
+// // Declaring class "Timer"
+// var Timer = function() {        
+//     // Property: Frequency of elapse event of the timer in millisecond
+//     this.Interval = 1000;
     
-    // Property: Whether the timer is enabled or not
-    this.Enable = new Boolean(false);
+//     // Property: Whether the timer is enabled or not
+//     this.Enable = new Boolean(false);
     
-    // Event: Timer tick
-    this.Tick;
+//     // Event: Timer tick
+//     this.Tick;
     
-    // Member variable: Hold interval id of the timer
-    var timerId = 0;
+//     // Member variable: Hold interval id of the timer
+//     var timerId = 0;
     
-    // Member variable: Hold instance of this class
-    var thisObject;
+//     // Member variable: Hold instance of this class
+//     var thisObject;
     
-    // Function: Start the timer
-    //=============================
-    this.Start = function()
-    {
-        this.Enable = new Boolean(true);
+//     // Function: Start the timer
+//     //=============================
+//     this.Start = function()
+//     {
+//         this.Enable = new Boolean(true);
 
-        thisObject = this;
-        if (thisObject.Enable)
-        {
-            thisObject.timerId = setInterval(
-            function()
-            {
-                thisObject.Tick(); 
-            }, thisObject.Interval);
-        }
-    };
+//         thisObject = this;
+//         if (thisObject.Enable)
+//         {
+//             thisObject.timerId = setInterval(
+//             function()
+//             {
+//                 thisObject.Tick(); 
+//             }, thisObject.Interval);
+//         }
+//     };
     
-    // Function: Stops the timer
-    //==================================
-    this.Stop = function()
-    {            
-        thisObject.Enable = new Boolean(false);
-        clearInterval(thisObject.timerId);
-        round++;
-    };
+//     // Function: Stops the timer
+//     //==================================
+//     this.Stop = function()
+//     {            
+//         thisObject.Enable = new Boolean(false);
+//         clearInterval(thisObject.timerId);
+//         round++;
+//     };
 
-};
+// };
 
-var index = 30;
-var obj = new Timer();
-obj.Interval = 1000;
-obj.Tick = timer_tick;
+// var index = 30;
+// var obj = new Timer();
+// obj.Interval = 1000;
+// obj.Tick = timer_tick;
 
-obj.Start();
-//==================
-function timer_tick()
-{
-    index  = index - 1;
-    document.getElementById("timerOut").innerHTML = "You have "+index+" seconds remaining to select your answer";
+// obj.Start();
+// //==================
+// function timer_tick()
+// {
+//     index  = index - 1;
+//     document.getElementById("timerOut").innerHTML = "You have "+index+" seconds remaining to select your answer";
 
-    //$("#butt1").text("Hello world!");
-    if (index <= 0) {
-        obj.Stop();
-        document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
-        i++;
-        index = 30;
-        answersOntoButtons(i);  
-        listenToButtons;
-        obj.Start();
+//     //$("#butt1").text("Hello world!");
+//     if (index <= 0) {
+//         obj.Stop();
+//         document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
+//         i++;
+//         index = 30;
+//         answersOntoButtons(i);  
+//         listenToButtons;
+//         obj.Start();
         
-    }
-}
+//     }
+// }
 }
 
 
