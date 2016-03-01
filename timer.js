@@ -31,17 +31,29 @@ var trivia = [
 //==========================================================
 
 var listenToButtons = function() {
-    $('#butt1').on('click', function() {
-     alert('butt1!!!!');
+
+            $('#butt1').on('click', function() {
+            var playerChoice = $(this).attr("data-id");
+            console.log(playerChoice);
     });
+
+         
          $('#butt2').on('click', function() {
-     alert('butt2!!!!');
+            var playerChoice = $(this).attr("data-id");
+            console.log(playerChoice);
+            //alert('butt2!!!!');
     });
-                 $('#butt3').on('click', function() {
-     alert('butt3!!!!');
+
+            $('#butt3').on('click', function() {
+            var playerChoice = $(this).attr("data-id");
+            console.log(playerChoice);
+            //alert('butt3!!!!');
     });
-                         $('#butt4').on('click', function() {
-     alert('butt4!!!!');
+
+            $('#butt4').on('click', function() {
+            var playerChoice = $(this).attr("data-id");
+            console.log(playerChoice);
+            //alert('butt4!!!!');
     });
 }
 
