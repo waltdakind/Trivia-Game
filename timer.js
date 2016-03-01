@@ -1,6 +1,6 @@
 $( document ).ready(function() {
     answersOntoButtons(i);
-    listenToButtons();
+    listenToButtons(i);
    
 
     
@@ -12,6 +12,7 @@ $( document ).ready(function() {
 //===============================================
 var i = 0;
 var round = 1;
+var randomSpot;
 var trivia = [ 
 {"question": "What was Harry Houdini's real name?", "realAnswer": "Erich Weiss", "fakeAnswer1": "Robert Houdin", "fakeAnswer2":"Neville Maskylne", "fakeAnswer3":"Magic Mike", "answeredCorrectly":false},
 {"question": "Rabbits engage in coprophagy, what is that?", "realAnswer": "Eating their own droppings", "fakeAnswer1": "Mating in large groups", "fakeAnswer2":"Mating multiple times ","fakeAnswer3": "Eating grasses and vegetables", "answeredCorrectly":false},
@@ -30,30 +31,58 @@ var trivia = [
 //  var questionForDisplay = trivia[i].question;
 //==========================================================
 
-var listenToButtons = function() {
+var listenToButtons = function(num) {
 
-            $('#butt1').on('click', function() {
-            var playerChoice = $(this).attr("data-id");
+         $('#butt1').on('click', function() {
+            var answerForDisplay = trivia[num].realAnswer;
+            var playerChoice = $(this).text();
             console.log(playerChoice);
+            if (playerChoice === answerForDisplay) {
+                console.log('success');
+            }
+            else {
+                console.log('failure');
+            }
+
     });
 
          
          $('#butt2').on('click', function() {
-            var playerChoice = $(this).attr("data-id");
+            var answerForDisplay = trivia[num].realAnswer;
+            var playerChoice = $(this).text();
             console.log(playerChoice);
-            //alert('butt2!!!!');
+            if (playerChoice === answerForDisplay) {
+                console.log('success');
+            }
+            else {
+                console.log('failure');
+            }
+            
     });
 
             $('#butt3').on('click', function() {
-            var playerChoice = $(this).attr("data-id");
+            var answerForDisplay = trivia[num].realAnswer;
+            var playerChoice = $(this).text();
             console.log(playerChoice);
-            //alert('butt3!!!!');
+            if (playerChoice === answerForDisplay) {
+                console.log('success');
+            }
+            else {
+                console.log('failure');
+            }
     });
 
             $('#butt4').on('click', function() {
-            var playerChoice = $(this).attr("data-id");
+            var answerForDisplay = trivia[num].realAnswer;
+            var playerChoice = $(this).text();
             console.log(playerChoice);
-            //alert('butt4!!!!');
+            if (playerChoice === answerForDisplay) {
+                console.log('success');
+            }
+            else {
+                console.log('failure');
+            }
+            
     });
 }
 
