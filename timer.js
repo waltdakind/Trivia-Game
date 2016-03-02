@@ -1,7 +1,7 @@
 $( document ).ready(function() {
     answersOntoButtons(i);
     listenToButtons(i);
-   
+    myCounter.start();
 
     
 });
@@ -12,8 +12,78 @@ $( document ).ready(function() {
 //===============================================
 var i = 0;
 var round = 1;
-var randomSpot;
-// Declaring class "Timer"
+
+//new round start function
+var newRound = function() {
+    round++;
+    i++;
+    console.log('the function was called');
+    answersOntoButtons(i);
+    listenToButtons(i);
+    myCounter.start();
+}
+
+
+var myCounter = new Countdown({  
+    seconds:30,  // number of seconds to count down
+    onUpdateStatus: function(sec){$('#timerOut').text(sec + ' seconds remaining');}, // callback for each second
+    onCounterEnd: function(){
+     $('#timerOut').text('Time is up!');
+     newRound;
+
+ }//final action
+
+});
+
+
+function Countdown(options) {
+  var timer,
+  instance = this,
+  seconds = options.seconds || 10,
+  updateStatus = options.onUpdateStatus || function () {},
+  counterEnd = options.onCounterEnd || function () {};
+
+  function decrementCounter() {
+    updateStatus(seconds);
+    if (seconds === 0) {
+      counterEnd();
+      instance.stop();
+    }
+    seconds--;
+  }
+
+  this.start = function () {
+    clearInterval(timer);
+    timer = 0;
+    seconds = options.seconds;
+    timer = setInterval(decrementCounter, 1000);
+  };
+
+  this.stop = function () {
+    clearInterval(timer);
+  };
+}
+
+//stop receiving click events once question is answered
+//call this after first choice is clicked, reset binding at start of next round
+var unbindAllButtons = function() {
+        console.log('click unbinder called');
+        $("#butt1").unbind("click");
+        $("#butt2").unbind("click");
+        $("#butt3").unbind("click");
+        $("#butt4").unbind("click"); 
+
+}
+
+//ran out of time
+var ranOutOfTime = function() {
+
+    if(round<=10) {newRound; }
+    else{$('#timerOut').text('Game over!');}
+}
+
+
+
 
 var trivia = [ 
 {"question": "What was Harry Houdini's real name?", "realAnswer": "Erich Weiss", "fakeAnswer1": "Robert Houdin", "fakeAnswer2":"Neville Maskylne", "fakeAnswer3":"Magic Mike", "answeredCorrectly":false},
@@ -40,16 +110,15 @@ var listenToButtons = function(num) {
             var playerChoice = $(this).text();
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
-                console.log('success');
-                i++;
-                
-
+            //    console.log('success');
+            trivia[i].answeredCorrectly = true;
+                unbindAllButtons;
+                        newRound;
             }
             else {
                 console.log('failure');
-                i++;
-                
-
+                unbindAllButtons;
+                        newRound;
             }
 
     });
@@ -61,14 +130,15 @@ var listenToButtons = function(num) {
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
                 console.log('success');
-                i++;
-                
+                trivia[i].answeredCorrectly = true;
+                unbindAllButtons;
+                        newRound;
 
             }
             else {
                 console.log('failure');
-                i++;
-                
+                unbindAllButtons;
+                        newRound;
 
             }
             
@@ -79,15 +149,16 @@ var listenToButtons = function(num) {
             var playerChoice = $(this).text();
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
-                console.log('success');
-                i++;
-                
+            //    console.log('success');
+            trivia[i].answeredCorrectly = true;
+                unbindAllButtons;
+                        newRound;
 
             }
             else {
                 console.log('failure');
-                i++;
-                
+                unbindAllButtons;
+                        newRound;
 
             }
     });
@@ -97,21 +168,25 @@ var listenToButtons = function(num) {
             var playerChoice = $(this).text();
             console.log(playerChoice);
             if (playerChoice === answerForDisplay) {
-                console.log('success');
-                i++;
-                
+            //    console.log('success');
+            trivia[i].answeredCorrectly = true;
+                unbindAllButtons;
+                        newRound;
 
             }
             else {
                 console.log('failure');
-                i++;
-
+                unbindAllButtons;
+                        newRound;
             }
             
     });
 }
 
-var trivia.prototype.answersOntoButtons = function(num) {
+
+
+
+var answersOntoButtons = function(num) {
 
 // Proper syntax on object lookup 
 // is working******************************
@@ -154,99 +229,12 @@ switch(randomSpot) {
         break;
 }  //end switch
 
-//evaluate answer
-
 };
-
-
-//update game counters
-
-
-
-
-//==========================================================
-
-trivia.prototype.Timer = function() {        
-    // Property: Frequency of elapse event of the timer in millisecond
-    this.Interval = 1000;
-    
-    // Property: Whether the timer is enabled or not
-    this.Enable = new Boolean(false);
-    
-    // Event: Timer tick
-    this.Tick;
-    
-    // Member variable: Hold interval id of the timer
-    var timerId = 0;
-    
-    // Member variable: Hold instance of this class
-    var thisObject;
-    
-    // Function: Start the timer
-    //=============================
-    this.Start = function()
-    {
-        this.Enable = new Boolean(true);
-
-        thisObject = this;
-        if (thisObject.Enable)
-        {
-            thisObject.timerId = setInterval(
-            function()
-            {
-                thisObject.Tick(); 
-            }, thisObject.Interval);
-        }
-    };
-    
-    // Function: Stops the timer
-    //==================================
-    this.Stop = function()
-    {            
-        thisObject.Enable = new Boolean(false);
-        clearInterval(thisObject.timerId);
-        round++;
-    };
-
-};
-    var index = 30;
-    var obj = new Timer();
-    obj.Interval = 1000;
-    obj.Tick = timer_tick;
-
-    obj.Start();
-    //==================
-    function timer_tick()
-    {
-        index  = index - 1;
-        document.getElementById("timerOut").innerHTML = "You have "+index+" seconds remaining to select your answer";
-
-        //$("#butt1").text("Hello world!");
-        if (index <= 0) {
-            obj.Stop();
-            document.getElementById("timerOut").innerHTML = '<p> Time is up! </p>';
-            i++;
-            index = 30;
-            answersOntoButtons(i);  
-            listenToButtons;
-            obj.Start();
-            
-        }
-    };
-
 //main process
 //================================================================
 
 
-// function CountDown (secs, elem) {
-// var element = document.getElementById(elem);
-// element.innerHTML = "You have "+secs+" seconds remaining to select your answer";
-// var timer = setTimeout('CountDown('+secs+', "'+elem+'")',1000);
-// if(secs < 1) {
-// //   clearTimeout(timer);
-//  element.innerHTML = '<p> Times is up! </p>';
-//  //load next question
-// }
-// secs--;
-// };
-// CountDown(30, "timerOut");
+
+
+
+
